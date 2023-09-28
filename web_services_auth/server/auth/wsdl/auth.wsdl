@@ -1,0 +1,90 @@
+<?xml version ='1.0' encoding ='UTF-8' ?> 
+<definitions name='auth' 
+  targetNamespace='http://example.org/auth' 
+  xmlns:tns=' http://example.org/auth' 
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' 
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/' 
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' 
+  xmlns='http://schemas.xmlsoap.org/wsdl/'> 
+
+<message name='userCreateRequest'> 
+  <part name='username' type='xsd:string'/> 
+  <part name='password' type='xsd:string'/> 
+  <!--<part name='user_level' type='xsd:string'/> -->
+</message> 
+
+<message name='usrPwdAuthRequest'> 
+  <part name='username' type='xsd:string'/> 
+  <part name='password' type='xsd:string'/> 
+  <!--<part name='user_level' type='xsd:string'/> -->
+</message> 
+
+<message name='userCreateResponse'> 
+  <part name='Result' type='xsd:string'/> 
+</message>
+
+<message name='usrPwdAuthResponse'> 
+  <part name='Result' type='xsd:string'/> 
+</message>
+
+<portType name='userCreatePortType'> 
+  <operation name='userCreate'> 
+    <input message='tns:userCreateRequest'/> 
+    <output message='tns:userCreateResponse'/> 
+  </operation> 
+</portType>
+
+<portType name='usrPwdAuthPortType'> 
+  <operation name='usrPwdAuth'> 
+    <input message='tns:usrPwdAuthRequest'/> 
+    <output message='tns:usrPwdAuthResponse'/> 
+  </operation> 
+</portType>
+
+<binding name='userCreateBinding' type='tns:userCreatePortType'> 
+  <soap:binding style='rpc' 
+    transport='http://schemas.xmlsoap.org/soap/http'/> 
+  <operation name='userCreate'> 
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#auth'/> 
+    <input> 
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </input> 
+    <output> 
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </output> 
+  </operation> 
+</binding>
+
+<binding name='usrPwdAuthBinding' type='tns:usrPwdAuthPortType'> 
+  <soap:binding style='rpc' 
+    transport='http://schemas.xmlsoap.org/soap/http'/> 
+  <operation name='usrPwdAuth'> 
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#auth'/> 
+    <input> 
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </input> 
+    <output> 
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </output> 
+  </operation> 
+</binding>
+
+<!-- edit here -->
+<service name='userCreateService'> 
+  <port name='userCreatePort' binding='userCreateBinding'> 
+    <soap:address location='http://127.0.0.1/web_services_auth/server/auth/auth.php'/> 
+  </port> 
+</service>
+
+<service name='usrPwdAuthService'> 
+  <port name='usrPwdAuthPort' binding='usrPwdAuthBinding'> 
+    <soap:address location='http://127.0.0.1/web_services_auth/server/auth/auth.php'/> 
+  </port> 
+</service>
+
+</definitions>
