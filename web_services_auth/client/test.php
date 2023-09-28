@@ -7,12 +7,20 @@
 
 <body>
 <?php
-$client = new SoapClient("http://10.24.9.246/web_services_auth/server/auth/auth.php");
-$username = "Seal_9933";
-$pwd="TyMt123456789gh";
+// edit here
+if (isset($_GET['username']) && isset($_GET['pwd'])) {
+    $username = $_GET['username'];
+    $pwd = $_GET['pwd'];
 
-echo '<h3> call function user&password authenticate</h3>';
-echo $client->usrPwdAuth($username,$pwd);
+    $client = new SoapClient("http://10.24.9.246/web_services_auth/server/auth/auth.php");
+    
+    echo '<h3>Call function user&password authenticate</h3>';
+    echo $client->usrPwdAuth($username, $pwd);
+} else {
+    echo '<h3>Call function user&password authenticate</h3>';
+    echo "Username and password parameters are missing in the URL.";
+}
 ?>
+
 </body>
 </html>

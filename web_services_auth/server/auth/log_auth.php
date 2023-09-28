@@ -1,7 +1,8 @@
 <?php
 function logMessage($message, $logFile = 'auth-service.log') {
     $timestamp = date('Y-m-d H:i:s');
-    $logEntry = "[$timestamp] message : $message\n";
+    $userIP = file_get_contents("https://ipinfo.io/ip");
+    $logEntry = "[$userIP][$timestamp] message : $message\n";
 
     $fileHandle = fopen($logFile, 'a');
 

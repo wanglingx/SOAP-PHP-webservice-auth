@@ -27,7 +27,7 @@ function userCreate($username,$password){
         else{
             // validate password format pwd,min,max
             if (isPasswordValid($password, 8, 20)) {
-                // hash+salt password
+                // hash password
                 $hashedPwd = password_hash($password, PASSWORD_BCRYPT);
                 // save to databse
                 createUsr($username,$hashedPwd,$user_level);
